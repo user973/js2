@@ -4,6 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <style>
+        li{
+            cursor:pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,24 +61,32 @@
         ];
         
         var menu = new Menu(items);
-        //console.log(menu, typeof menu);
         var ul = menu.render("top-menu", "top nav-class");
-        //console.log(ul, typeof ul);
         document.write(ul.innerHTML);
         
         function SubMenu(items){
-            Menu.call(this);
+            Menu.apply(this, arguments);
             
-            var mRender = this.render;
+            var self = this;
+            var parentRender = this.render;
             
             this.render = function() {
                 
                 var ul = document.createElement("ul");
                 
                 for (let i = 0; i < items.length; i++) {
-                    let li = document.createElement("li");
-                    li.appendChild(items[i]);
-                    ul.appendChild(li);
+                    
+                    if (items[i] instanceof HTMLElement) {                        
+                        
+                        var li = document.createElement("li");
+                        let ulId = items[i].getAttribute("id");
+                        li.innerHTML = (typeof ulId == undefined ? "" : ulId) + items[i].outerHTML;                        
+                        ul.appendChild(li);
+                        
+                    } else {
+                        
+                        ul.innerHTML += (new Menu(items[i])).render("t", "p").innerHTML;
+                    }                    
                 }
                 return ul;
                 
@@ -82,11 +95,12 @@
             
         }
         
-        var menu = new SubMenu([new Menu(items).render("x","y"), new Menu(items).render("z","p")]);
-        //console.log(menu, typeof menu);
+        document.write("<hr>");
+        document.write("<hr>");
+        
+        var menu = new SubMenu([items, new Menu(items).render("x","y"), new Menu(items).render("z","p")]);
         var ul = menu.render();
-        //console.log(ul, typeof ul);
-        document.write(ul.innerHTML);
+        document.write(ul.outerHTML);
         
     </script>
 
