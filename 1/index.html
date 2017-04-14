@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        
+        function Menu(items){
+            
+            this.idAttribute;
+            this.className;
+            var mItems = items;
+            var that = this;
+            
+            this.render = function(idAttribute, className){
+                
+                this.idAttribute = idAttribute;
+                this.className = className;
+                
+                var ul = document.createElement("ul");
+                ul.setAttribute("id", idAttribute);
+                ul.className = className;
+                for (let i = 0; i < mItems.length; i++) {
+                    let li = document.createElement("li");
+                    let a = document.createElement("a");
+                    a.setAttribute("href", mItems[i].href);
+                    a.setAttribute("target", "_blank");
+                    a.innerHTML = mItems[i].title;
+                    li.appendChild(a);
+                    ul.appendChild(li);
+                }
+                return ul;
+            
+            };            
+            
+        }
+        
+        var items = [
+            {
+                title : "jquery",
+                href : "https://habrahabr.ru/post/51717/"
+            },
+            {
+                title : "android",
+                href : "https://habrahabr.ru/post/175825/"
+            },
+            {
+                title : "design",
+                href : "https://habrahabr.ru/company/pixli/blog/325866/"
+            }
+        ];
+        
+        var menu = new Menu(items);
+        //console.log(menu, typeof menu);
+        var ul = menu.render("top-menu", "top nav-class");
+        //console.log(ul, typeof ul);
+        document.write(ul.innerHTML);
+        
+        function SubMenu(items){
+            Menu.call(this);
+            
+            var mRender = this.render;
+            
+            this.render = function() {
+                
+                var ul = document.createElement("ul");
+                
+                for (let i = 0; i < items.length; i++) {
+                    let li = document.createElement("li");
+                    li.appendChild(items[i]);
+                    ul.appendChild(li);
+                }
+                return ul;
+                
+                
+            }
+            
+        }
+        
+        var menu = new SubMenu([new Menu(items).render("x","y"), new Menu(items).render("z","p")]);
+        //console.log(menu, typeof menu);
+        var ul = menu.render();
+        //console.log(ul, typeof ul);
+        document.write(ul.innerHTML);
+        
+    </script>
+
+</body>
+
+</html>
