@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX</title>
+    <style>
+        label{
+            width:100px;
+            display:inline-block;
+        }
+        label+input{
+            margin-top:10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="task">
+        
+        Необходимо скачать, прилагаемый файл validator.php. Самостоятельно разобраться в формате данных который он отдает.<br/>
+        С помощью ajax запросов к этому файлу необходимо реализовать валидатор формы.<br/>
+        array(<br/>
+        'username' => 'Somebody',<br/>
+        'password' => 'mypassword',<br/>
+        'email' => 'some@some.ru',<br/>
+        'gender' => 'm',<br/>
+        'credit_card' => '9872389-2424-234224-234', <br/>
+        'bio' => 'This is good! I think I will switch to another language'<br/>
+        )<br/>
+        Ограничения:<br/>
+        1. Все поля обязательные<br/>
+        2. Пол - 1 символ (M, Ж)<br/>
+        3. Email и credit card должны быть указаны в соответствующем формате.<br/>
+        4. Логин и пароль, мин длинна 6 символов, макс - 100<br/>
+        https://www.dropbox.com/s/gtegivhi32lp9bx/validator.php?dl=0<br/>
+        https://github.com/Wixel/GUMP/archive/1.3.zip<br/>
+        В архиве есть файл gump.class.php, его необходимо положить рядом с validator.php.<br/>
+        ПО для организации сервера:<br/>
+        1. http://www.denwer.ru/<br/>
+        2. https://ospanel.io/<br/>
+        3. https://www.apachefriends.org/ru/index.html<br/>
+        Можно использовать любой<br/>
+        
+    </div>
+    
+    <form name="person" method="POST" action="#" onsubmit="return validateFormOnSubmit(this);">
+       <label for="username">Username</label><input type="text" id="username" name="username" value="Somebody"><br/>
+       <label for="password">Password</label><input type="text" id="password" name="password" value="mypassword"><br/>
+       <label for="email">Email</label><input type="text" id="email" name="email" value="some@some.ru"><br/>
+       <label for="gender">Gender</label><input type="text" id="gender" name="gender" value="m"><br/>
+       <label for="credit_card">Credit card</label><input type="text" id="credit_card" name="credit_card" value="4916 4663 8803 9370"><br/>
+       <label for="bio">Bio</label><input type="text" id="bio" name="bio" value="This is good! I think I will switch to another language"><br/>
+       <label for="birth">Birth</label><input type="date" id="birth" name="birth" value="1992-05-04"><br/>
+            
+       <input type="submit" value="send">
+    </form>
+    
+    
+    <script>
+        function validateFormOnSubmit(theForm) {
+            
+            var formData = new FormData(theForm);
+            
+            var xhr;
+            if (window.XMLHttpRequest){
+                xhr = new XMLHttpRequest();
+            } else if(window.ActiveXObject) {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhr.overrideMimeType("text/xml");
+            xhr.onreadystatechange = function(result){
+                if (xhr.readyState == 4){
+                    if (xhr.status == 200) {
+                        console.log(result.currentTarget.response);
+                    } else {
+                        console.log(result.currentTarget.response);
+                    }                
+                }            
+            };
+            xhr.open("POST", "http://task2/validator.php", true);
+            xhr.timeout = 15000;
+            xhr.ontimeout = function(){
+                console.log("timeout");
+            };
+            xhr.send(formData);    
+        }
+    </script>
+    
+</body>
+</html>
