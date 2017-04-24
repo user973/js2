@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+        }
+        .wrapper {
+            width: 1200px;
+        }
+        .top_menu {
+            list-style-type: none;
+        }
+        .top_menu li {
+            float: left;
+            margin: 20px 20px 20px 0px;
+            cursor: pointer;
+        }
+        .top_menu li.selected {
+            color:#00baff;
+        }
+        .top_menu li:hover {
+            color:#00baff;
+        }
+        .container {
+            clear: both;
+        }
+        .container > article {
+            text-align: justify;
+        }
+        .container > article:not(.selected) {
+            display: none;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $('.top_menu').on('click', function(e){
+                if (!$(e.target).hasClass('selected')) {
+                    $('li.selected').toggleClass('selected');
+                    $('article.selected').toggleClass('selected');
+                    $(e.target).toggleClass('selected');
+                    $('#' + e.target.id.toLowerCase() + '-content').toggleClass('selected');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <ul class="top_menu">
+            <li id="android" class="selected">Android</li>
+            <li id="jquery">jQuery</li>
+            <li id="java">Java</li>
+            <li id="javascript">JavaScript</li>
+            <li id="php">php</li>
+        </ul>
+        <div class="container">
+            <article id="android-content" class="selected">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A obcaecati rem nulla veniam sequi, quibusdam tenetur non asperiores, totam aspernatur necessitatibus ullam excepturi quaerat molestias tempore aliquid voluptate deserunt accusamus. Ullam magni reiciendis iusto sequi consequatur minus voluptatem quam, fuga, commodi nisi hic laudantium iure, quidem impedit beatae inventore aliquid repellendus. Nam, suscipit necessitatibus quia blanditiis earum minima culpa at quisquam, tempora ducimus illo magnam molestiae ad temporibus eligendi error unde voluptas? Iure placeat sit est ipsum perspiciatis quibusdam at? Eaque incidunt voluptates labore quaerat omnis blanditiis perferendis voluptas commodi quibusdam numquam iste dolorem quas natus, repellendus vero nobis quia!</article>
+            <article id="jquery-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate illo inventore neque, vitae minima asperiores cupiditate molestiae accusamus quibusdam, mollitia harum. Rem, perferendis natus esse culpa nulla beatae. Molestias perspiciatis veritatis laudantium. Quaerat et aperiam quibusdam atque deleniti alias sapiente repudiandae fuga incidunt vel. Distinctio sapiente accusamus consectetur, dolorum eligendi!</article>
+            <article id="java-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, ab, nemo. Error sit fuga quia obcaecati eum dolorem minima deserunt consectetur incidunt laudantium modi blanditiis odio exercitationem officiis iste qui quo unde sequi veritatis voluptatibus provident, nihil expedita reprehenderit magni! Impedit, eius, ipsam nemo iure molestiae voluptatibus alias error officiis expedita. Maxime molestias magnam delectus consectetur reprehenderit blanditiis magni nihil optio, tempore beatae, iste voluptate consequuntur quidem natus, voluptas totam distinctio nam placeat iusto. Quas nemo rem repellendus temporibus animi, cum maiores voluptate dolores cumque quo voluptatum excepturi inventore quam magnam molestias dicta velit culpa. Reprehenderit animi provident quae impedit sequi ab, blanditiis iste ipsa architecto ex, ad vel, facere quia quidem, nostrum? Assumenda nobis vero obcaecati voluptates nesciunt quaerat.</article>
+            <article id="javascript-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque iste minima nam dolores. Illo, eum. Rerum id maiores reprehenderit ipsam, at nihil vero quam voluptate exercitationem! Eius, perferendis voluptates suscipit iure voluptate blanditiis, ratione, distinctio ducimus earum, laboriosam officiis tenetur et necessitatibus. Soluta repudiandae nulla ratione, quasi optio quia cupiditate ipsam nemo. Delectus id rem ad libero aperiam voluptate, ullam maiores saepe ea. Aliquid, vero reiciendis repudiandae libero esse mollitia.</article>
+            <article id="php-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam rem corrupti eius, itaque doloribus in, a sint natus iure aspernatur consequuntur aliquid reiciendis aut voluptatibus harum laborum, iste. Mollitia distinctio quo, cumque possimus, neque hic tenetur optio expedita eos excepturi accusamus deserunt provident porro sequi libero aliquid velit iure iste earum ex dicta! Dolore, qui, delectus. Ipsum consectetur quam dicta harum consequuntur blanditiis minus, sapiente adipisci repudiandae sit officia. Excepturi eveniet reprehenderit, natus, sequi velit nemo, exercitationem odit ab quibusdam illum voluptates suscipit autem corporis. Cum perferendis unde, vero cupiditate! Atque explicabo, numquam ipsum nihil praesentium cupiditate. Nihil, ducimus, dolorum. Voluptates ducimus soluta, atque quasi obcaecati consectetur aut nulla ea cupiditate cum facere voluptatem inventore velit corporis nobis sit repellat, temporibus reprehenderit, esse! Nisi ab perferendis, recusandae deleniti blanditiis ex?</article>
+        </div>
+    </div>
+
+</body>
+
+</html>

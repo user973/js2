@@ -37,8 +37,8 @@
         }
         
         //Создайте регэксп, который ищет все положительные числа, в том числе и с десятичной точкой. Например, var str = "1.5 0 12. 123.4."
-        var numbers = "1.5 0 12. 123.4 -6 0.678 5618 -7.09 -123";
-        var positiveNumbers = numbers.match(/\d+(\.\d+)?/g);
+        var numbers = "1.5 0 12. 123.4. -6 0.678 5618 -7.09 -123";
+        var positiveNumbers = numbers.match(/(?:\s)\d+(\.\d+)?/g);
         console.log(positiveNumbers);
         
         //Время может быть в формате часы:минуты или часы-минуты. И часы и минуты состоят из двух цифр, например 09:00, 21-30. Напишите регулярное выражение для поиска времени
@@ -63,11 +63,6 @@
             for (attr in inputs) {
                 if (inputs[attr].tagName.toLowerCase() == "input" && inputs[attr].getAttribute("type").toLowerCase() != "submit") {
                     inputs[attr].style.border = "2px solid " + (new RegExp(inputs[attr].getAttribute("data-pattern"), "gi").test(inputs[attr].value) ? "green" : "red");
-                    /*if (new RegExp(inputs[attr].getAttribute("data-pattern"), "gi").test(inputs[attr].value)) {
-                        inputs[attr].style.border = "2px solid green";
-                    } else {
-                        inputs[attr].style.border = "2px solid red";
-                    }*/
                 }
             }
             return false;
